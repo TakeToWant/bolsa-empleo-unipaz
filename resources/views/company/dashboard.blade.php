@@ -168,11 +168,18 @@
                 </p>
             </div>
             @if($company->isApproved())
-                <a href="{{ route('company.jobs.create') }}"
-                   style="background:#00963F; color:#fff; border:none; border-radius:10px; padding:.65rem 1.3rem; font-weight:700; font-size:.9rem; text-decoration:none; display:inline-flex; align-items:center; gap:.5rem; transition:background .18s; flex-shrink:0;"
-                   onmouseover="this.style.background='#007832'" onmouseout="this.style.background='#00963F'">
-                    <i class="bi bi-plus-circle-fill"></i>Publicar vacante
-                </a>
+                <div class="d-flex gap-2">
+                    <a href="{{ route('company.jobs.index') }}"
+                       style="background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.2); color:#fff; border-radius:10px; padding:.65rem 1.3rem; font-weight:600; font-size:.9rem; text-decoration:none; display:inline-flex; align-items:center; gap:.5rem; transition:all .2s; flex-shrink:0;"
+                       onmouseover="this.style.background='rgba(255,255,255,.2)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
+                        <i class="bi bi-list-ul"></i>Mis Vacantes
+                    </a>
+                    <a href="{{ route('company.jobs.create') }}"
+                       style="background:#00963F; color:#fff; border:none; border-radius:10px; padding:.65rem 1.3rem; font-weight:600; font-size:.9rem; text-decoration:none; display:inline-flex; align-items:center; gap:.5rem; transition:background .18s; flex-shrink:0;"
+                       onmouseover="this.style.background='#007832'" onmouseout="this.style.background='#00963F'">
+                        <i class="bi bi-plus-circle-fill"></i>Publicar vacante
+                    </a>
+                </div>
             @endif
         </div>
     </div>
@@ -180,28 +187,32 @@
     {{-- KPIs --}}
     <div class="row g-3 mb-4">
         <div class="col-sm-6 col-lg-3">
-            <div class="kpi-card d-flex align-items-center gap-3"
-                 style="border-left:4px solid #273475;">
-                <div class="kpi-icon" style="background:#eef0f9; color:#273475;">
-                    <i class="bi bi-briefcase-fill"></i>
+            <a href="{{ route('company.jobs.index') }}" style="text-decoration:none; color:inherit; display:block;">
+                <div class="kpi-card d-flex align-items-center gap-3"
+                     style="border-left:4px solid #273475;">
+                    <div class="kpi-icon" style="background:#eef0f9; color:#273475;">
+                        <i class="bi bi-briefcase-fill"></i>
+                    </div>
+                    <div>
+                        <div class="kpi-value">{{ $totalVacantes }}</div>
+                        <div class="kpi-label">Total vacantes</div>
+                    </div>
                 </div>
-                <div>
-                    <div class="kpi-value">{{ $totalVacantes }}</div>
-                    <div class="kpi-label">Total vacantes</div>
-                </div>
-            </div>
+            </a>
         </div>
         <div class="col-sm-6 col-lg-3">
-            <div class="kpi-card d-flex align-items-center gap-3"
-                 style="border-left:4px solid #00963F;">
-                <div class="kpi-icon" style="background:#e6f7ed; color:#00963F;">
-                    <i class="bi bi-check-circle-fill"></i>
+            <a href="{{ route('company.jobs.index') }}" style="text-decoration:none; color:inherit; display:block;">
+                <div class="kpi-card d-flex align-items-center gap-3"
+                     style="border-left:4px solid #00963F;">
+                    <div class="kpi-icon" style="background:#e6f7ed; color:#00963F;">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div>
+                        <div class="kpi-value">{{ $activeVacantes }}</div>
+                        <div class="kpi-label">Vacantes activas</div>
+                    </div>
                 </div>
-                <div>
-                    <div class="kpi-value">{{ $activeVacantes }}</div>
-                    <div class="kpi-label">Vacantes activas</div>
-                </div>
-            </div>
+            </a>
         </div>
         <div class="col-sm-6 col-lg-3">
             <div class="kpi-card d-flex align-items-center gap-3"

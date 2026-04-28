@@ -1,6 +1,7 @@
 # 🚀 Deploy en Railway — Bolsa de Empleo UNIPAZ
 
 ## Requisitos previos
+
 - Cuenta en [github.com](https://github.com) (gratis)
 - Cuenta en [railway.app](https://railway.app) (gratis con GitHub)
 
@@ -40,17 +41,17 @@ git push -u origin main
 
 En tu proyecto de Railway ve a **Variables** y agrega estas una por una:
 
-| Variable | Valor |
-|----------|-------|
-| `APP_NAME` | `Bolsa de Empleo UNIPAZ` |
-| `APP_ENV` | `production` |
-| `APP_DEBUG` | `false` |
-| `APP_KEY` | *(Railway lo genera con el start.sh)* |
-| `DB_CONNECTION` | `sqlite` |
-| `SESSION_DRIVER` | `file` |
-| `QUEUE_CONNECTION` | `database` |
-| `GOOGLE_CLIENT_ID` | *tu client id de Google* |
-| `GOOGLE_CLIENT_SECRET` | *tu client secret de Google* |
+| Variable               | Valor                                 |
+| ---------------------- | ------------------------------------- |
+| `APP_NAME`             | `Bolsa de Empleo UNIPAZ`              |
+| `APP_ENV`              | `production`                          |
+| `APP_DEBUG`            | `false`                               |
+| `APP_KEY`              | _(Railway lo genera con el start.sh)_ |
+| `DB_CONNECTION`        | `sqlite`                              |
+| `SESSION_DRIVER`       | `file`                                |
+| `QUEUE_CONNECTION`     | `database`                            |
+| `GOOGLE_CLIENT_ID`     | _tu client id de Google_              |
+| `GOOGLE_CLIENT_SECRET` | _tu client secret de Google_          |
 
 > La variable `APP_URL` y `GOOGLE_REDIRECT_URI` las agregas **después** de obtener el dominio en el Paso 4.
 
@@ -62,8 +63,8 @@ En tu proyecto de Railway ve a **Variables** y agrega estas una por una:
 2. En la sección **Networking** → clic en **"Generate Domain"**
 3. Obtendrás una URL como: `https://bolsa-empleo-unipaz-production.up.railway.app`
 4. Vuelve a **Variables** y agrega:
-   - `APP_URL` = `https://bolsa-empleo-unipaz-production.up.railway.app`
-   - `GOOGLE_REDIRECT_URI` = `https://bolsa-empleo-unipaz-production.up.railway.app/auth/google/callback`
+    - `APP_URL` = `https://bolsa-empleo-unipaz-production.up.railway.app`
+    - `GOOGLE_REDIRECT_URI` = `https://bolsa-empleo-unipaz-production.up.railway.app/auth/google/callback`
 
 ---
 
@@ -74,9 +75,9 @@ En [console.cloud.google.com](https://console.cloud.google.com):
 1. Ve a tu proyecto → **APIs y servicios → Credenciales**
 2. Edita tu cliente OAuth
 3. En **"URIs de redireccionamiento autorizados"** agrega:
-   ```
-   https://bolsa-empleo-unipaz-production.up.railway.app/auth/google/callback
-   ```
+    ```
+    https://bolsa-empleo-unipaz-production.up.railway.app/auth/google/callback
+    ```
 
 ---
 

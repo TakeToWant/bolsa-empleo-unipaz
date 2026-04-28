@@ -70,6 +70,9 @@ Route::prefix('empresa')->name('company.')->middleware(['auth', 'role:company'])
             'update'  => 'jobs.update',
             'destroy' => 'jobs.destroy',
         ],
+        'parameters' => [
+            'vacantes' => 'jobPosting',
+        ],
     ]);
 });
 

@@ -110,8 +110,8 @@ class JobPostingController extends Controller
         $company = Auth::user()->company;
         if ($jobPosting->company_id !== $company->id) abort(403);
 
-        $jobPosting->update(['status' => 'closed']);
+        $jobPosting->delete();
 
-        return back()->with('success', 'Vacante cerrada correctamente.');
+        return back()->with('success', 'Vacante eliminada correctamente.');
     }
 }

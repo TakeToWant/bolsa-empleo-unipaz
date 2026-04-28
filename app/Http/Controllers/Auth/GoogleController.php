@@ -15,7 +15,7 @@ class GoogleController extends Controller
      */
     public function redirect()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
     /**
@@ -24,10 +24,14 @@ class GoogleController extends Controller
     public function callback()
     {
         try {
-            $googleUser = Socialite::driver('google')->user();
+            $googleUser = Socialite::driver('google')
+                ->stateless()
+                ->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))
+                ->user();
         } catch (\Exception $e) {
+            \Log::error('Google Auth Error: ' . $e->getMessage());
             return redirect()->route('login')
-                ->with('error', 'Error al autenticar con Google. Intenta de nuevo.');
+                ->with('error', 'Error al autenticar con Google: ' . $e->getMessage());
         }
 
         // Validar que sea correo institucional UNIPAZ

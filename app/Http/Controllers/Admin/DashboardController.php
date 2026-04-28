@@ -20,11 +20,20 @@ class DashboardController extends Controller
         $totalPostulaciones = Application::count();
 
         // Estadísticas para gráficos (últimos 6 meses) — compatible con SQLite y MySQL
-        $monthlyApplications = Application::selectRaw("strftime('%m', created_at) as month, COUNT(*) as total")
-            ->whereRaw("strftime('%Y', created_at) = ?", [now()->year])
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get();
+        $driver = \Illuminate\Support\Facades\DB::connection()->getDriverName();
+        if ($driver === 'sqlite') {
+            $monthlyApplications = Application::selectRaw("strftime('%m', created_at) as month, COUNT(*) as total")
+                ->whereRaw("strftime('%Y', created_at) = ?", [now()->year])
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get();
+        } else {
+            $monthlyApplications = Application::selectRaw("DATE_FORMAT(created_at, '%m') as month, COUNT(*) as total")
+                ->whereYear('created_at', now()->year)
+                ->groupBy('month')
+                ->orderBy('month')
+                ->get();
+        }
 
         $recentCompanies = Company::with('user')->latest()->take(5)->get();
         $recentApplications = Application::with(['user', 'jobPosting.company'])->latest()->take(8)->get();
