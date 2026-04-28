@@ -23,10 +23,14 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-# Ejecutar seeder solo si la tabla users está vacía
-USER_COUNT=$(php artisan tinker --execute="echo App\Models\User::count();" 2>/dev/null | tail -1)
+# Asegurar que el usuario Administrador siempre exista en producción
+echo "Verificando/Creando cuenta de Administrador..."
+php artisan db:seed --class=AdminSeeder --force
+
+# Ejecutar el resto del seeder (empresas de prueba) solo si la tabla está casi vacía (por ejemplo, si no hay empresas)
+USER_COUNT=$(php artisan tinker --execute="echo App\Models\User::where('role', 'company')->count();" 2>/dev/null | tail -1)
 if [ "$USER_COUNT" = "0" ] || [ -z "$USER_COUNT" ]; then
-    echo "Sembrando datos iniciales..."
+    echo "Sembrando datos de prueba iniciales..."
     php artisan db:seed --force
 fi
 
